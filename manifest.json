@@ -3,6 +3,7 @@
   "name": "AEyes",
   "description": "A browser extension to help those who are visually impaired, understand images while browsing the web.",
   "version": "1.0",
+  "permissions": ["storage"],
   "action": {
     "default_popup": "index.html",
     "default_icon": "image/icon.png"

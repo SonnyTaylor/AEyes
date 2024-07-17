@@ -8,10 +8,4 @@
     "default_popup": "src/settings/settings.html",
     "default_icon": "image/icon.png"
   },
-  "content_scripts": [
-    {
-      "matches": ["<all_urls>"],
-      "js": ["src/image2text.js"]
-    }
-  ]
 }

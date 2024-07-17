@@ -1,3 +1,7 @@
+.buttons {
+    display: inline;
+}
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -59,6 +63,14 @@ button {
     border-radius: 4px;
     cursor: pointer;
     font-size: 16px; /* Increased font size for readability */
+}
+
+.reset-button {
+    background-color: red;
+}
+
+.reset-button:hover {
+    background-color: darkred;
 }
 
 button:hover {

@@ -8,4 +8,7 @@
     "default_popup": "src/settings/settings.html",
     "default_icon": "image/icon.png"
   },
+  "background": {
+    "service_worker": "src/backround/backround.js"
+  }
 }

@@ -10,5 +10,11 @@
   },
   "background": {
     "service_worker": "src/backround/backround.js"
-  }
+  },
+  "content_scripts": [
+    {
+      "js": ["src/scripts/main.js"],
+      "matches": ["<all_urls>"]
+    }
+  ]
 }

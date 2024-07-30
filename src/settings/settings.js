@@ -13,7 +13,12 @@ function saveSettings() {
         enableDisable: enableDisable,
         imageUnderstander: imageUnderstander
     }).then(() => {
-        console.log('Settings saved');
+        console.log('Settings saved:', {
+            apiKey: apiKey,
+            language: language,
+            enableDisable: enableDisable,
+            imageUnderstander: imageUnderstander
+        });
         // Optionally, show a save confirmation to the user
         alert('Settings saved successfully!');
     });
@@ -33,6 +38,8 @@ function loadSettings() {
         document.getElementById('language').value = items.language;
         document.getElementById('enableDisable').checked = items.enableDisable;
         document.getElementById('imageUnderstander').checked = items.imageUnderstander;
+
+        console.log('Settings loaded:', items);
     });
 }
 

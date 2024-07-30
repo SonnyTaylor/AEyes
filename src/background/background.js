@@ -1,5 +1,6 @@
 // background.js
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  console.log('Message received:', request);
   if (request.action === 'generateAltText') {
     chrome.storage.sync.get(['apiKey', 'language'], (items) => {
       const apiKey = items.apiKey;

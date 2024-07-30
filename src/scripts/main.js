@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // Listen for messages from the background script
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+chrome.runtime.onMessage.addListener((request) => {
     if (request.action === 'setAltText') {
         // Select all images with missing or empty alt attributes
         const images = document.querySelectorAll('img:not([alt]), img[alt=""]');

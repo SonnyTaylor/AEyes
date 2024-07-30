@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (items.enableDisable) {
             // Select all images with missing or empty alt attributes
             const images = document.querySelectorAll('img:not([alt]), img[alt=""]');
+            console.log('Found images:', images.length);
             images.forEach((img, index) => {
                 console.log('Sending message for image at index:', index);
                 // Send message to background script to generate alt text

@@ -1,7 +1,14 @@
 // background.js
+
+chrome.runtime.onInstalled.addListener(({ reason }) => {
+  if (reason === 'install') {
+    console.log('Extension installed');
+  }
+});
+
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  console.log('Message received:', request);
   if (request.action === 'generateAltText') {
+    console.log('Message received:', request);
     chrome.storage.sync.get(['apiKey', 'language'], (items) => {
       const apiKey = items.apiKey;
       const language = items.language || 'en';

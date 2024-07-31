@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Test Page for AEyes Extension</title>
+    <style>
+      .alt-description {
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Test Page for AEyes Extension</h1>
+    <p>
+      This page contains images without alt tags. Use this page to test your
+      AEyes Chrome extension. Once the extension adds the correct alt tags they
+      will automatically be added below the image.
+    </p>
+
+    <h2>Images Without Alt Tags</h2>
+    <img
+      src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Nokota_Horses_cropped.jpg/330px-Nokota_Horses_cropped.jpg"
+      alt=""
+    />
+    <p class="alt-description"></p>
+
+    <img
+      src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Bonnet_macaque_%28Macaca_radiata%29_Photograph_By_Shantanu_Kuveskar.jpg/330px-Bonnet_macaque_%28Macaca_radiata%29_Photograph_By_Shantanu_Kuveskar.jpg"
+      alt=""
+    />
+    <p class="alt-description"></p>
+
+    <img
+      src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Bananavarieties.jpg/375px-Bananavarieties.jpg"
+      alt=""
+    />
+    <p class="alt-description"></p>
+
+    <p>
+      End of the test page. The images above should be processed by the AEyes
+      extension to add alt tags.
+    </p>
+
+    <script>
+      const images = document.querySelectorAll("img");
+      const altDescriptions = document.querySelectorAll(".alt-description");
+
+      images.forEach((image, index) => {
+        image.addEventListener("load", () => {
+          const alt = image.getAttribute("alt");
+          altDescriptions[index].textContent = alt ? alt : "NONE";
+        });
+      });
+
+      // Create a mutation observer to watch for changes in the alt tags
+      const observer = new MutationObserver(() => {
+        images.forEach((image, index) => {
+          const alt = image.getAttribute("alt");
+          altDescriptions[index].textContent = alt ? alt : "NONE";
+        });
+      });
+
+      // Observe changes in the alt tags
+      observer.observe(document.body, {
+        subtree: true,
+        attributes: true,
+        attributeFilter: ["alt"],
+      });
+    </script>
+  </body>
+</html>

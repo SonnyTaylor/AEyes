@@ -15,11 +15,18 @@
     {
       "js": ["src/scripts/main.js"],
       "matches": ["<all_urls>", "file:///*", "https://*/*"],
-      "exclude_globs": [
-        "*://www.google.com/*",
-        "*://www.bing.com/*",
-        "*://duckduckgo.com/*https://yandex.com/",
-        "*://yandex.com/*"
+      "exclude_matches": [
+        "*://www.google.com/search*",
+        "*://www.bing.com/search*",
+        "*://search.yahoo.com/*",
+        "*://duckduckgo.com/*",
+        "*://www.baidu.com/s*",
+        "*://yandex.com/search*",
+        "*://www.youtube.com/*",
+        "*://twitter.com/*",
+        "*://www.facebook.com/*",
+        "*://www.instagram.com/*",
+        "*://www.reddit.com/*"
       ]
     }
   ]

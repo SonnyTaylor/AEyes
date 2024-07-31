@@ -14,7 +14,7 @@
   "content_scripts": [
     {
       "js": ["src/scripts/main.js"],
-      "matches": ["<all_urls>", "file:///*"]
+      "matches": ["<all_urls>", "file:///*", "https://*/*"]
     }
   ]
 }

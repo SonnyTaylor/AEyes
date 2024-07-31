@@ -22,6 +22,15 @@ function loadSavedAltTags(callback) {
   });
 }
 
+// Function to generate a unique key for an image
+function getImageKey(img) {
+  if (img.src.startsWith('data:image')) {
+    // For base64 images, use a hash of the content
+    return 'base64_' + img.src.slice(0, 100); // Use first 100 characters as a "hash"
+  }
+  return img.src;
+}
+
 // Main function to process images
 function processImages() {
   // Retrieve user settings from Chrome storage
@@ -33,10 +42,11 @@ function processImages() {
         console.log("Found images:", images.length);
 
         images.forEach((img, index) => {
-          if (savedAltTags[img.src]) {
+          const imageKey = getImageKey(img);
+          if (savedAltTags[imageKey]) {
             // Use saved alt tag immediately if available
-            console.log("Using saved alt tag for image:", img.src);
-            img.alt = savedAltTags[img.src];
+            console.log("Using saved alt tag for image:", imageKey);
+            img.alt = savedAltTags[imageKey];
           } else {
             console.log("Sending message for image at index:", index);
             // Send message to background script to generate alt text
@@ -44,6 +54,7 @@ function processImages() {
               action: "generateAltText",
               imageUrl: img.src,
               imageIndex: index,
+              imageKey: imageKey
             });
           }
         });
@@ -66,10 +77,10 @@ chrome.runtime.onMessage.addListener((request) => {
         images[request.imageIndex].alt = request.altText;
         
         // Save the generated alt tag
-        savedAltTags[images[request.imageIndex].src] = request.altText;
+        savedAltTags[request.imageKey] = request.altText;
         saveAltTags();
         
-        console.log("Generated alt text set and saved for:", images[request.imageIndex].src);
+        console.log("Generated alt text set and saved for:", request.imageKey);
       }, setAltTextDelay);
     }
   }

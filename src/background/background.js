@@ -1,5 +1,3 @@
-// background.js
-
 chrome.runtime.onInstalled.addListener(({ reason }) => {
   if (reason === 'install') {
     console.log('Extension installed');
@@ -16,7 +14,6 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       if (apiKey) {
         fetchAltText(request.imageUrl, apiKey, language)
           .then(altText => {
-            console.log('Alt text generated:', altText);
             chrome.tabs.sendMessage(sender.tab.id, {
               action: 'setAltText',
               altText: altText,
@@ -42,7 +39,7 @@ async function fetchAltText(imageUrl, apiKey, language) {
         content: [
           {
             type: 'text',
-            text: `Describe this image as if it were an alt tag in HTML, respond in this language: ${language}`
+            text: `Describe this image as if it were an alt tag in HTML, keep it short and concise only about a few words, respond in this language: ${language}`
           },
           {
             type: 'image_url',
@@ -71,9 +68,9 @@ async function fetchAltText(imageUrl, apiKey, language) {
     }
 
     const data = await response.json();
-    const altText = data.choices[0].message.content.trim(); // Adjusting for the new format
+    const altText = data.choices[0].message.content.trim();
 
-    console.log('Alt text fetched:', altText); // New console log
+    console.log('Alt text fetched:', altText); 
 
     return altText;
   } catch (error) {

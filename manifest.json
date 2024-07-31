@@ -14,7 +14,13 @@
   "content_scripts": [
     {
       "js": ["src/scripts/main.js"],
-      "matches": ["<all_urls>", "file:///*", "https://*/*"]
+      "matches": ["<all_urls>", "file:///*", "https://*/*"],
+      "exclude_globs": [
+        "*://www.google.com/*",
+        "*://www.bing.com/*",
+        "*://duckduckgo.com/*https://yandex.com/",
+        "*://yandex.com/*"
+      ]
     }
   ]
 }

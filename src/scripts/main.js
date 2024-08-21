@@ -1,3 +1,6 @@
+// Variable to control delay of adding the generated alt text
+var setAltTextDelay = 2000;
+
 // Object to store generated alt tags
 let savedAltTags = {};
 
@@ -14,66 +17,60 @@ function loadSavedAltTags(callback) {
     if (result.savedAltTags) {
       savedAltTags = result.savedAltTags;
       console.log('Loaded saved alt tags:', savedAltTags);
-    } else {
-      console.log('No saved alt tags found.');
     }
     callback();
   });
 }
 
-// Function to generate a unique key for an image
-function getImageKey(img) {
-  if (img.src.startsWith('data:image')) {
-    return 'base64_' + img.src.slice(0, 100); // Use first 100 characters as a "hash"
-  }
-  return img.src;
-}
-
 // Main function to process images
 function processImages() {
+  // Retrieve user settings from Chrome storage
   chrome.storage.sync.get(["apiKey", "enableDisable"], (items) => {
     if (items.enableDisable) {
       loadSavedAltTags(() => {
+        // Select all images with missing or empty alt attributes
         const images = document.querySelectorAll('img:not([alt]), img[alt=""]');
         console.log("Found images:", images.length);
 
         images.forEach((img, index) => {
-          const imageKey = getImageKey(img);
-          if (savedAltTags[imageKey]) {
-            console.log("Using saved alt tag for image:", imageKey);
-            img.alt = savedAltTags[imageKey];
+          if (savedAltTags[img.src]) {
+            // Use saved alt tag immediately if available
+            console.log("Using saved alt tag for image:", img.src);
+            img.alt = savedAltTags[img.src];
           } else {
             console.log("Sending message for image at index:", index);
+            // Send message to background script to generate alt text
             chrome.runtime.sendMessage({
               action: "generateAltText",
               imageUrl: img.src,
               imageIndex: index,
-              imageKey: imageKey
             });
           }
         });
       });
-    } else {
-      console.log("Extension is disabled.");
     }
   });
 }
 
 // Listen for messages from the background script
 chrome.runtime.onMessage.addListener((request) => {
-  const setAltTextDelay = 2000;
   if (request.action === "setAltText") {
+    // Select all images with missing or empty alt attributes
     const images = document.querySelectorAll('img:not([alt]), img[alt=""]');
     if (images[request.imageIndex]) {
       console.log("Setting generated alt text for image at index:", request.imageIndex);
+      
+      // Add delay only when setting generated alt text
       setTimeout(function () {
+        // Update the alt attribute of the image
         images[request.imageIndex].alt = request.altText;
-        savedAltTags[request.imageKey] = request.altText;
+        
+        // Save the generated alt tag
+        savedAltTags[images[request.imageIndex].src] = request.altText;
         saveAltTags();
-        console.log("Generated alt text set and saved for:", request.imageKey);
+        
+        console.log("Generated alt text set and saved for:", images[request.imageIndex].src);
       }, setAltTextDelay);
-    } else {
-      console.log("No image found at index:", request.imageIndex);
     }
   }
 });

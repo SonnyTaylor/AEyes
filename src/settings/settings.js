@@ -4,20 +4,17 @@ function saveSettings() {
     const apiKey = document.getElementById('apiKey').value;
     const language = document.getElementById('language').value;
     const enableDisable = document.getElementById('enableDisable').checked;
-    const imageUnderstander = document.getElementById('imageUnderstander').checked;
 
     // Save settings to Chrome storage
     chrome.storage.sync.set({
         apiKey: apiKey,
         language: language,
         enableDisable: enableDisable,
-        imageUnderstander: imageUnderstander
     }).then(() => {
         console.log('Settings saved:', {
             apiKey: apiKey,
             language: language,
             enableDisable: enableDisable,
-            imageUnderstander: imageUnderstander
         });
         // Optionally, show a save confirmation to the user
         alert('Settings saved successfully!');
@@ -31,13 +28,11 @@ function loadSettings() {
         apiKey: '',
         language: 'en',
         enableDisable: true,
-        imageUnderstander: true
     }).then((items) => {
         // Set values in input fields based on loaded settings
         document.getElementById('apiKey').value = items.apiKey;
         document.getElementById('language').value = items.language;
         document.getElementById('enableDisable').checked = items.enableDisable;
-        document.getElementById('imageUnderstander').checked = items.imageUnderstander;
 
         console.log('Settings loaded:', items);
     });

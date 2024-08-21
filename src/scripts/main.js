@@ -1,6 +1,3 @@
-// Variable to control delay of adding the generated alt text
-var setAltTextDelay = 2000;
-
 // Object to store generated alt tags
 let savedAltTags = {};
 
@@ -65,6 +62,8 @@ function processImages() {
 
 // Listen for messages from the background script
 chrome.runtime.onMessage.addListener((request) => {
+  // Variable to control delay of adding the generated alt text
+  var setAltTextDelay = 2000;
   if (request.action === "setAltText") {
     // Select all images with missing or empty alt attributes
     const images = document.querySelectorAll('img:not([alt]), img[alt=""]');

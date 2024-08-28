@@ -41,7 +41,7 @@ input[type="password"],
 select {
   width: 100%;
   padding: 10px; /* Increased padding for better touch target size */
-  margin: 5px 0 20px 0;
+  margin: 5px 0 5px 0;
   display: inline-block;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -82,6 +82,20 @@ input:focus,
 select:focus {
   outline: 3px solid #000; /* High contrast outline for focus state */
   outline-offset: 2px;
+}
+
+.apiHelp {
+  margin-top: 5px; /* Reduced margin-top */
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  margin-bottom: 5px;
 }
 
 @media screen and (max-width: 600px) {

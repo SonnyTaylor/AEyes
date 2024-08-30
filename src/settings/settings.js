@@ -17,6 +17,7 @@ function saveSettings() {
             enableDisable: enableDisable,
         });
         // Optionally, show a save confirmation to the user
+        // Kinda looks ugly but it works
         alert('Settings saved successfully!');
     });
 }
@@ -33,7 +34,6 @@ function loadSettings() {
         document.getElementById('apiKey').value = items.apiKey;
         document.getElementById('language').value = items.language;
         document.getElementById('enableDisable').checked = items.enableDisable;
-
         console.log('Settings loaded:', items);
     });
 }

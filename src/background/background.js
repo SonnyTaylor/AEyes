@@ -1,16 +1,20 @@
 chrome.runtime.onInstalled.addListener(({ reason }) => {
   if (reason === 'install') {
+    // Console log to see if extension is installed
     console.log('Extension installed');
   }
 });
 
+// Listen for messages from the content script
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  // Generate alt text for the image
   if (request.action === 'generateAltText') {
     console.log('Message received:', request);
     chrome.storage.sync.get(['apiKey', 'language'], (items) => {
       const apiKey = items.apiKey;
       const language = items.language || 'en';
 
+      // If the API key is set, fetch the alt text
       if (apiKey) {
         fetchAltText(request.imageUrl, apiKey, language)
           .then(altText => {
@@ -21,6 +25,8 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
             });
           })
           .catch(error => {
+            // Log the error and send an empty alt text
+            // This could be improved
             console.error('Error generating alt text:', error);
           });
       }
@@ -31,6 +37,8 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 async function fetchAltText(imageUrl, apiKey, language) {
   const url = 'https://api.openai.com/v1/chat/completions';
 
+  // Request body for the OpenAI API
+  // Use GPT-4o-mini model for vision but also its cheaper than regular GPT-4
   const requestBody = {
     model: 'gpt-4o-mini',
     messages: [
@@ -64,6 +72,7 @@ async function fetchAltText(imageUrl, apiKey, language) {
     });
 
     if (!response.ok) {
+      // Throw an error if the response is not OK
       throw new Error(`HTTP error! status: ${response.status}`);
     }
 
@@ -74,6 +83,7 @@ async function fetchAltText(imageUrl, apiKey, language) {
 
     return altText;
   } catch (error) {
+    // This error handling could be improved as well
     console.error('Error:', error);
     return '';
   }

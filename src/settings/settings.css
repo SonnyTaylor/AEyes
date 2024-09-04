@@ -1,109 +1,108 @@
-// This CSS kinda sux but it works for now
-
+/* This CSS kinda sux but it works for now */
 .buttons {
-  display: inline;
+    display: inline;
 }
 
 body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f4f4f4;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
 }
 
 h1 {
-  color: #333;
+    color: #333;
 }
 
 form {
-  max-width: 90%;
-  min-width: 300px; /* Ensures form is not too small on larger screens */
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin: 20px;
+    max-width: 90%;
+    min-width: 300px; /* Ensures form is not too small on larger screens */
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 20px;
 }
 
 div {
-  margin-bottom: 15px; /* Increased margin for better spacing */
+    margin-bottom: 15px;
 }
 
 label {
-  display: block;
-  margin-bottom: 5px;
-  color: #333; /* Darker color for better contrast */
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
 }
 
 input[type="password"],
 select {
-  width: 100%;
-  padding: 10px; /* Increased padding for better touch target size */
-  margin: 5px 0 5px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-  font-size: 16px; /* Increased font size for readability */
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0 5px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 16px;
 }
 
 input[type="checkbox"] {
-  margin-top: 5px;
+    margin-top: 5px;
 }
 
 button {
-  width: 100%;
-  background-color: #4caf50;
-  color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 16px; /* Increased font size for readability */
+    width: 100%;
+    background-color: #4caf50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
 }
 
 .reset-button {
-  background-color: red;
+    background-color: red;
 }
 
 .reset-button:hover {
-  background-color: darkred;
+    background-color: darkred;
 }
 
 button:hover {
-  background-color: #45a049;
+    background-color: #45a049;
 }
 
 button:focus,
 input:focus,
 select:focus {
-  outline: 3px solid #000; /* High contrast outline for focus state */
-  outline-offset: 2px;
+    outline: 3px solid #000; /* High contrast outline for focus state */
+    outline-offset: 2px;
 }
 
 .apiHelp {
-  margin-top: 5px; /* Reduced margin-top */
+    margin-top: 5px;
 }
 
 ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
 }
 
 li {
-  margin-bottom: 5px;
+    margin-bottom: 5px;
 }
 
 @media screen and (max-width: 600px) {
-  form {
-    max-width: 100%;
-    margin: 0;
-    border-radius: 0; /* Makes form take up entire screen width on small screens */
-  }
+    form {
+        max-width: 100%;
+        margin: 0;
+        border-radius: 0; /* Makes form take up entire screen width on small screens */
+    }
 }

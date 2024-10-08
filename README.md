@@ -16,7 +16,7 @@ Install my-project with npm
 
 ### Chrome
 
-- Download from chrome extension store
+- Download from chrome extension store (NOT AVAILABLE YET)
 
 #### ALTERNATIVE:
 

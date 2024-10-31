@@ -12,8 +12,6 @@ It finds images on pages that lack alt tags, it then adds them back using gpt-4o
 
 ## Installation
 
-Install my-project with npm
-
 ### Chrome
 
 - Download from chrome extension store (NOT AVAILABLE YET)
